@@ -1,2 +1,1 @@
-# nuxt-audio-utils
-# audio-utils
+# Nuxt Audio Utils
