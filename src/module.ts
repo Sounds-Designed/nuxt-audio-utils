@@ -1,8 +1,6 @@
 import { defineNuxtModule, createResolver, addImportsDir } from '@nuxt/kit'
 import type { ModuleOptions } from '@nuxt/schema'
 
-export type * from './runtime/types'
-
 // Module options TypeScript interface definition
 export interface AudioUtilsOptions extends ModuleOptions {
   enabled?: boolean;
