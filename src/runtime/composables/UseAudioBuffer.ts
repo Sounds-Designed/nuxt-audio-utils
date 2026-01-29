@@ -12,7 +12,7 @@ export function useAudioBuffer(fileUrl: string): {
     audioBuffer.value = null;
   }
 
-  const mountFile = async (fileUrl: string) => {
+  const mountFile = (fileUrl: string) => {
     return new Promise<Ref<AudioBuffer | null>>(async (resolve, reject) => {
       try {
         audioBuffer.value = await getAudioBufferFromURL(fileUrl);
