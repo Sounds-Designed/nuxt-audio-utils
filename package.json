@@ -1,6 +1,6 @@
 {
   "name": "@sounds-designed/nuxt-audio-utils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Nuxt module with utilities for loading, parsing and processing audio",
   "packageManager": "pnpm@10.28.1",
   "repository": {
