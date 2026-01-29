@@ -2,9 +2,10 @@ import { getAudioBufferFromURL } from '@sounds-designed/audio-to-image-utils';
 import { onMounted, onUnmounted, ref, type Ref } from 'vue';
 
 export function useAudioBuffer(fileUrl: string): {
-    audioBuffer: Ref<AudioBuffer | null>,
-    clearFile: (fileUrl: string) => void,
-    mountFile: (fileUrl: string) => Promise<Ref<AudioBuffer | null>> } {
+  audioBuffer: Ref<AudioBuffer | null>,
+  clearFile: (fileUrl: string) => void,
+  mountFile: (fileUrl: string) => Promise<Ref<AudioBuffer | null>>
+} {
 
   const audioBuffer: Ref<AudioBuffer | null> = ref(null);
 
@@ -12,17 +13,16 @@ export function useAudioBuffer(fileUrl: string): {
     audioBuffer.value = null;
   }
 
-  const mountFile = (fileUrl: string) => {
-    return new Promise<Ref<AudioBuffer | null>>(async (resolve, reject) => {
-      try {
-        audioBuffer.value = await getAudioBufferFromURL(fileUrl);
+  const mountFile = async (fileUrl: string) => {
+    try {
+      audioBuffer.value = await getAudioBufferFromURL(fileUrl);
 
-        resolve(audioBuffer)
-      } catch(error) {
-        reject(error)
-      }
-    })
+      return Promise.resolve(audioBuffer)
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
+
 
   onMounted(() => {
     mountFile(fileUrl);
