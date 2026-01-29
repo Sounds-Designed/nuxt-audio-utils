@@ -1,13 +1,18 @@
 {
   "name": "@sounds-designed/nuxt-audio-utils",
-  "version": "0.0.9",
+  "version": "0.0.0",
   "description": "A Nuxt module with utilities for loading, parsing and processing audio",
+  "packageManager": "pnpm@10.28.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sounds-Designed/nuxt-audio-utils.git"
   },
   "license": "GPL-3.0-or-later",
+  "homepage": "https://soundsdesigned.com",
   "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "exports": {
     ".": {
       "types": "./dist/types.d.mts",
@@ -29,21 +34,51 @@
     "access": "public"
   },
   "scripts": {
-    "prepack": "nuxt-module-build build",
-    "dev": "npm run dev:prepare && nuxi dev playground",
-    "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "prepack": "pnpm build",
+    "build": "nuxt-module-build build",
+    "build:stub": "nuxt-module-build build --stub",
+    "dev": "nuxt dev playgrounds/nuxt --uiDev",
+    "dev:build": "nuxt build playgrounds/nuxt",
+    "dev:vue": "pnpm --filter './playgrounds/vue' dev -- --uiDev",
+    "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare docs && pnpm dev:vue:build",
+    "docs": "nuxt dev docs --uiDev",
+    "docs:build": "nuxt build docs",
     "lint": "eslint .",
-    "fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
+    "test:nuxt": "vitest --project nuxt",
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
+    "test:vue": "vitest --project vue",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
+    "release": "release-it"
   },
   "dependencies": {
     "@nuxt/kit": "^4.2.2",
     "@nuxt/schema": "^4.2.2",
     "@sounds-designed/audio-to-image-utils": "^0.0.2",
+    "@sounds-designed/audio-utils": "^0.0.2",
+    "@standard-schema/spec": "^1.1.0",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/integrations": "^14.1.0",
+    "@vueuse/shared": "^14.1.0",
+    "defu": "^6.1.4",
+    "fuse.js": "^7.1.0",
+    "hookable": "^5.5.3",
+    "knitwork": "^1.3.0",
+    "magic-string": "^0.30.21",
+    "mlly": "^1.8.0",
+    "ohash": "^2.0.11",
+    "pathe": "^2.0.3",
+    "scule": "^1.3.0",
+    "tinyglobby": "^0.2.15",
+    "ufo": "^1.6.3",
+    "unplugin": "^2.3.11",
+    "unplugin-auto-import": "^21.0.0",
+    "unplugin-vue-components": "^31.0.0",
+    "vaul-vue": "0.4.1",
+    "vue-component-type-helpers": "^3.2.2",
     "change-case": "^5.4.4",
     "zod": "^4.3.5"
   },
@@ -54,28 +89,41 @@
     "@nuxt/eslint-config": "^1.12.1",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/scripts": "^0.13.2",
-    "@nuxt/test-utils": "^3.21.0",
-    "@nuxt/ui": "^4.3.0",
     "@types/node": "latest",
     "@typescript-eslint/parser": "^8.52.0",
+    "@nuxt/test-utils": "^3.23.0",
+    "@release-it/conventional-changelog": "^10.0.4",
+    "@vitejs/plugin-vue": "^6.0.2",
     "@vue/test-utils": "^2.4.6",
     "changelogen": "^0.6.2",
     "eslint": "^9.39.2",
-    "happy-dom": "^20.0.11",
+    "happy-dom": "^20.3.4",
     "jest": "^30.2.0",
     "nuxt": "^4.2.2",
     "playwright-core": "^1.57.0",
-    "prettier": "^3.7.4",
-    "prettier-eslint": "^16.4.2",
-    "prettier-plugin-tailwindcss": "^0.7.2",
+    "release-it": "^19.2.4",
     "ts-jest": "^29.4.6",
     "tsup": "^8.5.1",
     "typescript": "~5.9.3",
+    "unbuild": "^3.6.1",
     "vitest": "^3.2.4",
+    "vitest-axe": "^0.1.0",
+    "vitest-environment-nuxt": "^1.0.1",
+    "vue": "^3.5.25",
     "vue-eslint-parser": "^10.2.0",
-    "vue-tsc": "^3.2.1"
+    "vue-tsc": "^3.2.2"
   },
-  "peerDependencies": {
-    "@nuxt/ui": "^4.4.0"
-  }
+  "resolutions": {
+    "@sounds-designed/nuxt-audio-utils": "workspace:*"
+  },
+  "keywords": [
+    "audio-utils",
+    "nuxt-audio-utils",
+    "nuxt",
+    "vue3",
+    "vue",
+    "vuejs",
+    "vue.js",
+    "typescript"
+  ]
 }
