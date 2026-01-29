@@ -52,7 +52,7 @@
     "test:vue": "vitest --project vue",
     "test:watch": "vitest watch",
     "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
-    "release": "release-it"
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags"
   },
   "dependencies": {
     "@nuxt/kit": "^4.2.2",

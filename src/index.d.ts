@@ -1,13 +1,9 @@
 declare module "#app" {
-  interface NuxtApp {
-    $audioUtils: { [key: string]: Function };
-  }
+  interface NuxtApp {}
 }
 
 declare module "vue" {
-  interface ComponentCustomProperties {
-    $audioUtils: { [key: string]: Function };
-  }
+  interface ComponentCustomProperties {}
 }
 
 export {};

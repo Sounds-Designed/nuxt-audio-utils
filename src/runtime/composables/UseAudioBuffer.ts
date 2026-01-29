@@ -6,7 +6,7 @@ export function useAudioBuffer(fileUrl: string): {
     clearFile: (fileUrl: string) => void,
     mountFile: (fileUrl: string) => Promise<Ref<AudioBuffer | null>> } {
 
-  let audioBuffer: Ref<AudioBuffer | null> = ref(null);
+  const audioBuffer: Ref<AudioBuffer | null> = ref(null);
 
   const clearFile = () => {
     audioBuffer.value = null;
